@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BottomNavigationTextStyleActive" parent="@android:style/TextAppearance">
+        <item name="fontFamily">@font/product_sans</item>
+    </style>
+
+    <style name="BottomNavigationTextStyleInactive" parent="@android:style/TextAppearance">
+        <item name="fontFamily">@font/product_sans</item>
+    </style>
+
+    <style name="ImageButton">
+        <item name="android:layout_width">@dimen/button_size</item>
+        <item name="android:layout_height">@dimen/button_size</item>
+    </style>
+
+    <style name="BackButton" parent="ImageButton">
+        <item name="android:src">@drawable/ic_back</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@drawable/bg_image_icon</item>
+    </style>
+
+    <style name="MySlider" parent="@style/Widget.MaterialComponents.Slider">
+        <item name="labelStyle">@style/My_Tooltip</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Slider</item>
+    </style>
+
+    <style name="My_Tooltip" parent="Widget.MaterialComponents.Tooltip">
+        <!-- background color of the Tooltip -->
+        <item name="backgroundTint">@color/blue</item>
+    </style>
+
+    <style name="ThemeOverlay.Slider" parent="">
+        <!-- color used by the text in the Tooltip -->
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
+
+</resources>

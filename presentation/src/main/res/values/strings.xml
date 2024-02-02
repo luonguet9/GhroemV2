@@ -1,0 +1,31 @@
+<resources>
+    <!--App name-->
+    <string name="app_name">Ghroem</string>
+
+    <!--Menu bottom navigation-->
+    <string name="home">Home</string>
+    <string name="library">Library</string>
+    <string name="setting">Setting</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Notifications-->
+    <string name="channel_name">Music channel</string>
+    <string name="channel_description">Music Player Notification</string>
+
+    <!--Seekbar-->
+    <string name="seekbar_default">--:--</string>
+
+    <!--Animation-->
+    <string name="scaleX">scaleX</string>
+    <string name="scaleY">scaleY</string>
+
+    <!--Splash-->
+    <string name="denied_to_fetch_songs">You denied to fetch songs</string>
+    <!--Home-->
+    <string name="songs">Songs</string>
+    <string name="find_in_songs">Find in songs</string>
+
+    <!--Playlist-->
+    <string name="songs_with_placeholder">%d songs</string>
+    <string name="song_with_placeholder">%d song</string>
+</resources>

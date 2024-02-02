@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="song"
+            type="com.ghroem.domain.model.Song" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingHorizontal="@dimen/dp8"
+        android:background="@drawable/bg_bottom_media_player">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_song"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/spotify_blue" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@id/layout_button"
+            android:layout_toEndOf="@id/iv_song"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/product_sans"
+                android:lines="1"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_artist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/product_sans"
+                android:lines="1"
+                android:textSize="14sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/layout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_previous"
+                style="@style/ImageButton"
+                android:padding="@dimen/dp8"
+                android:src="@drawable/ic_previous" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_play_or_pause"
+                style="@style/ImageButton"
+                android:padding="@dimen/dp8"
+                android:src="@drawable/ic_pause" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_next"
+                style="@style/ImageButton"
+                android:padding="@dimen/dp8"
+                android:src="@drawable/ic_next" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </RelativeLayout>
+</layout>
