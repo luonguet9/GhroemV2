@@ -127,12 +127,17 @@ fun MainActivity.updateRealTimeSlider() {
 		while (isActive) {
 			musicService?.exoPlayer?.let {
 				binding.bottomSheetDetail.apply {
-					slider.apply {
-						if (it.duration > 0) valueTo = it.duration.toFloat()
-						if (valueTo > 0) valueFrom = 0f
-						if (it.currentPosition > 0 && it.currentPosition < valueTo) value =
-							it.currentPosition.toFloat()
+					try {
+						slider.apply {
+							if (it.duration > 0) valueTo = it.duration.toFloat()
+							if (valueTo > 0) valueFrom = 0f
+							if (it.currentPosition > 0 && it.currentPosition < valueTo) value =
+								it.currentPosition.toFloat()
+						}
+					} catch (e: Exception) {
+						Log.e("updateRealTimeSlider", "error: $e")
 					}
+					
 					tvTotalTime.text = timeFormatter().format(it.duration)
 					tvRunTime.text = timeFormatter().format(it.currentPosition)
 				}
@@ -251,12 +256,13 @@ fun MainActivity.handleOnClickBottomSheetPlayer() {
 fun MainActivity.handleOnClickShuffle() {
 	musicService?.exoPlayer?.let {
 		it.shuffleModeEnabled = !it.shuffleModeEnabled
+		appPreferences.shuffleMode = it.shuffleModeEnabled
 	}
 	setShuffleStatus()
 }
 
 fun MainActivity.handleOnClickRepeat() {
-	musicService?.exoPlayer?.repeatMode = when (musicService?.exoPlayer?.repeatMode) {
+	val repeatMode = when (musicService?.exoPlayer?.repeatMode) {
 		REPEAT_MODE_OFF -> REPEAT_MODE_ONE
 		REPEAT_MODE_ONE -> REPEAT_MODE_ALL
 		REPEAT_MODE_ALL -> REPEAT_MODE_OFF
@@ -264,6 +270,8 @@ fun MainActivity.handleOnClickRepeat() {
 			REPEAT_MODE_OFF
 		}
 	}
+	appPreferences.repeatMode = repeatMode
+	musicService?.exoPlayer?.repeatMode = repeatMode
 	setRepeatStatus()
 }
 

@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.OnScrollListener
 import com.ghroem.R
+import com.ghroem.data.data_source.local.pref.AppPreferences
 import com.ghroem.databinding.ActivityMainBinding
 import com.ghroem.domain.model.Song
 import com.ghroem.presentation.utils.enums.ActionMusic
@@ -35,9 +36,13 @@ import com.ghroem.presentation.utils.SEND_ACTION_TO_ACTIVITY
 import com.ghroem.presentation.utils.SONG_OBJECT
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
+	
+	@Inject
+	lateinit var appPreferences: AppPreferences
 	
 	/**Music Service*/
 	var musicService: MusicService? = null

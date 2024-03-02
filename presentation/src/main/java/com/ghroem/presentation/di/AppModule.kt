@@ -2,6 +2,7 @@ package com.ghroem.presentation.di
 
 import android.content.ContentResolver
 import android.content.Context
+import com.ghroem.data.data_source.local.pref.AppPreferences
 import com.ghroem.data.data_source.local.pref.SharedPreferencesManagerImpl
 import com.ghroem.data.data_source.local.realm.RealmManager
 import com.ghroem.data.mapper.PlaylistMapperImpl
@@ -45,6 +46,12 @@ object AppModule {
 	@Provides
 	fun provideSharedPreferencesManager(@ApplicationContext context: Context): SharedPreferencesManager {
 		return SharedPreferencesManagerImpl(context)
+	}
+	
+	@Singleton
+	@Provides
+	fun provideAppPreferences(@ApplicationContext context: Context): AppPreferences {
+		return AppPreferences(context)
 	}
 	
 	@Provides

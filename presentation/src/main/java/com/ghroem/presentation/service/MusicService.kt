@@ -16,6 +16,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.ghroem.R
+import com.ghroem.data.data_source.local.pref.AppPreferences
 import com.ghroem.domain.model.Song
 import com.ghroem.presentation.receive.ActionReceive
 import com.ghroem.presentation.ui.main.MainActivity
@@ -36,6 +37,9 @@ class MusicService : Service() {
 	@Inject
 	lateinit var exoPlayer: ExoPlayer
 	
+	@Inject
+	lateinit var appPreferences: AppPreferences
+	
 	private val mediaSession: MediaSessionCompat by lazy {
 		MediaSessionCompat(this, MEDIA_SESSION_COMPAT)
 	}
@@ -51,6 +55,10 @@ class MusicService : Service() {
 	
 	override fun onCreate() {
 		super.onCreate()
+		exoPlayer.apply {
+			repeatMode = appPreferences.repeatMode
+			shuffleModeEnabled = appPreferences.shuffleMode
+		}
 		initListener()
 	}
 	
