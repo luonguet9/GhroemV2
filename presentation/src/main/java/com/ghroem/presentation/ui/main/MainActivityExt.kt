@@ -202,7 +202,7 @@ fun MainActivity.handleOnClickBottomMediaPlayer() {
 	
 	binding.bottomPlayer.container.setOnSafeClickListener {
 		bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-		scrollToCurrentSong(false)
+		scrollToCurrentSong()
 	}
 }
 
@@ -288,13 +288,13 @@ fun MainActivity.handleOnClickFavorite() {
 
 /**----------------Recycler View Detail----------------*/
 
-fun MainActivity.scrollToCurrentSong(isSmooth: Boolean = true) {
-	musicService?.songs?.let {
-		val position = it.indexOf(musicService?.currentSong)
-		binding.bottomSheetDetail.rcvDetail.apply {
-			if (isSmooth) smoothScrollToPosition(position) else scrollToPosition(position)
-		}
+fun MainActivity.scrollToCurrentSong() {
+	val index = musicService?.getCurrentSongIndex() ?: return
+	binding.bottomSheetDetail.rcvDetail.apply {
+		if (lastSongIndex + 1 == index || lastSongIndex - 1 == index) smoothScrollToPosition(index)
+		else scrollToPosition(index)
 	}
+	lastSongIndex = index
 }
 
 /**----------------Others----------------*/
@@ -303,12 +303,6 @@ fun MainActivity.sendActionToService(action: Int) {
 		putExtra(ACTION_MUSIC_SERVICE, action)
 		startService(this)
 	}
-}
-
-fun MainActivity.getCurrentSongPosition(): Int {
-	return musicService?.let {
-		it.songs.indexOf(it.currentSong)
-	} ?: 0
 }
 
 fun MainActivity.getDetailSongViewHolder(): DetailSongViewHolder? {

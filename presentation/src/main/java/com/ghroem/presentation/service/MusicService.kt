@@ -307,6 +307,10 @@ class MusicService : Service() {
 		LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
 	}
 	
+	fun getCurrentSongIndex(): Int {
+		return songs.indexOfFirst { it.id == currentSong?.id }
+	}
+	
 	companion object {
 		private const val TAG = "MusicService"
 	}

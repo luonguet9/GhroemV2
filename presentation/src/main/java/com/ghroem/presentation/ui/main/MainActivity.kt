@@ -92,6 +92,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 	lateinit var detailAdapter: DetailAdapter
 	lateinit var detailLayoutManager: LinearLayoutManager
 	
+	var lastSongIndex = -1
+	
 	override fun getContentLayout(): Int = R.layout.activity_main
 	
 	override fun initView() {
@@ -182,7 +184,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 			putExtra(SONG_OBJECT, song)
 		}
 		startService(intent)
-		bindService(intent, serviceConnection, BIND_AUTO_CREATE)
+		if (!isServiceConnected) {
+			bindService(intent, serviceConnection, BIND_AUTO_CREATE)
+		}
 	}
 	
 	private fun handleActionMusic(action: Int) {
@@ -224,19 +228,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 				override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
 					super.onScrollStateChanged(recyclerView, newState)
 					if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-						val currentPosition =
+						val position =
 							detailLayoutManager.findFirstCompletelyVisibleItemPosition()
+						if (position == RecyclerView.NO_POSITION || position == musicService?.getCurrentSongIndex()) return
 						
-						if (currentPosition == RecyclerView.NO_POSITION) return
-						
-						when {
-							currentPosition > getCurrentSongPosition() -> {
-								sendActionToService(ActionMusic.NEXT.action)
-							}
-							
-							currentPosition < getCurrentSongPosition() -> {
-								sendActionToService(ActionMusic.PREVIOUS.action)
-							}
+						musicService?.let {
+							startMusicService(it.songs[position])
 						}
 					}
 				}
